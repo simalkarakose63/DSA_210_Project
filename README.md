@@ -16,7 +16,7 @@ Understanding this transformation is crucial for analyzing Turkey’s economic d
 - Which sectors (such as electronics, fashion, and groceries) experienced the strongest and most persistent growth?
 - How closely do online card spending trends correlate with overall e-commerce growth?
 
-## � 3. Data Sources
+##  3. Data Sources
 - **E-Ticaret Bilgi Platformu – Ministry of Trade:** Official e-commerce statistics including annual transaction volumes, growth rates, and total retail share.  
   🔗 https://www.eticaret.gov.tr/istatistikler  
 - **BKM – Bankalararası Kart Merkezi:** Card transaction data (internet vs. in-store spending), representing consumer payment trends.  
