@@ -17,20 +17,110 @@ Understanding this transformation is crucial for analyzing Turkey’s economic d
 - How closely do online card spending trends correlate with overall e-commerce growth?
 
 ##  3. Data Sources
-- **E-Ticaret Bilgi Platformu – Ministry of Trade:** Official e-commerce statistics including annual transaction volumes, growth rates, and total retail share.  
-  🔗 https://www.eticaret.gov.tr/istatistikler  
-- **BKM – Bankalararası Kart Merkezi:** Card transaction data (internet vs. in-store spending), representing consumer payment trends.  
-  🔗 https://bkm.com.tr/raporlar-ve-yayinlar/donemsel-bilgiler/  
-- **TÜİK – Turkish Statistical Institute:** Retail trade and services indices providing baseline total retail activity.  
-  🔗 https://data.tuik.gov.tr/Kategori/GetKategori?p=ticaret-ve-hizmet-115  
+This project combines official open datasets, public ministerial announcements, and forecasting models to construct a complete view of Turkey’s e-commerce evolution from 2018 to 2025.
+Due to the restructuring of the Ministry of Trade's ETBİS platform, some older PDF reports are no longer publicly accessible; therefore, verified announcements and sectoral publications are used for historical reconstruction.
 
-The dataset will cover 2018–2025, with 2020–2021 defined as the pandemic intervention period dividing pre- and post-COVID phases.
+🏛️ 1. Ministry of Trade — E-Commerce Announcements (2019–2023)
+
+Official annual e-commerce volumes and transaction counts, obtained from ministerial press releases and verified public statements.
+
+Provides:
+- Annual e-commerce volume (₺)
+- Annual number of transactions
+- Overall trade share (%)
+- Years covered: 2019, 2020, 2021, 2022, 2023
+
+📘 2. TÜBİSAD / Deloitte Market Reports (2018)
+
+Used to establish the pre-COVID baseline, including:
+- 2018 market size
+- Retail e-commerce ratio
+- Early sector distribution
+
+🏷️ 3. TÜİK — Retail Trade Volume Index
+
+Offers baseline total retail activity necessary to compute:
+
+- ecommerce_share = ecommerce_volume / total_retail_volume
+
+💳 4. BKM — Card Spending Data
+
+Includes:
+Internet card spending
+- Physical POS/in-store spending
+- Total yearly card transactions
+- Allows computation of:
+- internet_card_share = internet_card_spending / total_card_spending
+
+🔮 5. Forecasted Data (2024–2025)
+
+Since no official data exists yet for 2024–2025, these years will be generated using a time-series forecasting model (Meta Prophet) trained on real 2018–2023 data.
+
+Forecasts include:
+- Predicted e-commerce volume (₺)
+- Predicted number of transactions
+- Confidence intervals
+
+❗Forecasted values are labeled as estimated. The dataset will cover 2018–2025, with 2020–2021 defined as the pandemic intervention period dividing pre- and post-COVID phases.
 
 ##  4. Data Collection and Preparation Plan
-Data will be collected from the Ministry of Trade, BKM, and TÜİK official portals. E-commerce volumes will be merged with card transaction data to create yearly comparisons of online vs. physical spending. All monetary values will be standardized into billion ₺ units, and derived indicators such as:
-- `ecommerce_share = ecommerce_volume / total_retail_volume`
-- `internet_card_share = internet_card_spending / total_card_spending`
-will be calculated. The dataset will then be divided into three time frames: Pre-COVID (2018–2019), COVID period (2020–2021), and Post-COVID (2022–2025). Visualization will include line and bar plots highlighting the pandemic period and trend differences.
+
+ 4.1 Collecting Historical Data (2018–2023)
+In this step, I gather all reliable and publicly available data for Turkey’s e-commerce market from 2018 to 2023.
+
+Data Sources Used:
+
+- TÜBİSAD (2018 report) → Provides the pre-COVID baseline
+- Ministry of Trade announcements (2019–2023) → Official yearly e-commerce volume and number of transactions
+- TÜİK (Retail Trade Index) → Used to estimate the total retail market
+- BKM (Card Payments Reports) → Internet vs. in-store card spending trends
+
+❗All monetary values are converted to billion ₺ to keep the dataset uniform.
+
+
+ 4.2 Creating New Indicators
+
+To better understand the data, I calculate several new metrics.
+
+*Calculated Variables:*
+
+    ecommerce_share = ecommerce_volume / total_retail_volume
+
+    internet_card_share = internet_card_spending / total_card_spending
+
+    growth_rate = pct_change(ecommerce_volume)
+
+
+**Why these metrics matter**
+
+    ecommerce_share → Shows how big e-commerce is inside the overall retail market
+
+    internet_card_share → Shows if online payment behavior supports e-commerce growth
+
+    growth_rate → Helps identify acceleration or slowdowns in the market
+
+
+🔮 3. Forecasting 2024–2025
+
+There is no official data yet for 2024 or 2025. So these years will be predicted using a time-series model. Forecasting is necessary to analyze long-term trends and to see if the COVID-19 growth effect continues beyond 2023.
+
+*What the forecast provides:*
+
+- Predicted e-commerce volume
+- Predicted number of transactions
+- Confidence intervals
+
+
+⏳ 4. Splitting the Dataset into Time Periods
+
+To answer the research questions clearly, the dataset is divided into three periods:
+
+🟦 Pre-COVID (2018–2019) **Normal baseline period.**
+
+🟨 COVID Impact (2020–2021) **Sharp changes caused by lockdowns and digital adoption.**
+
+🟩 Post-COVID (2022–2025) **Stabilization and future trend (including forecast years).**
+
 
 ##  5. Analysis Plan
 The analysis will compare pre-, during-, and post-COVID figures to detect structural differences in e-commerce behavior. Descriptive statistics will show changes in e-commerce share, transaction growth, and spending ratios. Correlation analysis will evaluate the relationship between internet card spending (from BKM) and total e-commerce volume (from the Ministry of Trade). If sectoral data are available, comparisons across industries will highlight which areas achieved the strongest and most sustained digital transformation. Results will be visualized through time-series charts, growth comparison plots, and percentage change visuals to make the shift clear and intuitive.
