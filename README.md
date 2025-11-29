@@ -65,7 +65,7 @@ Forecasts include:
 
 ##  4. Data Collection and Preparation Plan
 
- 4.1 Collecting Historical Data (2018–2023)
+   4.1 Collecting Historical Data (2018–2023)
 In this step, I gather all reliable and publicly available data for Turkey’s e-commerce market from 2018 to 2023.
 
 Data Sources Used:
@@ -78,7 +78,7 @@ Data Sources Used:
 ❗All monetary values are converted to billion ₺ to keep the dataset uniform.
 
 
- 4.2 Creating New Indicators
+   4.2 Creating New Indicators
 
 To better understand the data, I calculate several new metrics.
 
@@ -123,7 +123,45 @@ To answer the research questions clearly, the dataset is divided into three peri
 
 
 ##  5. Analysis Plan
-The analysis will compare pre-, during-, and post-COVID figures to detect structural differences in e-commerce behavior. Descriptive statistics will show changes in e-commerce share, transaction growth, and spending ratios. Correlation analysis will evaluate the relationship between internet card spending (from BKM) and total e-commerce volume (from the Ministry of Trade). If sectoral data are available, comparisons across industries will highlight which areas achieved the strongest and most sustained digital transformation. Results will be visualized through time-series charts, growth comparison plots, and percentage change visuals to make the shift clear and intuitive.
+
+The analysis will compare pre-, during-, and post-COVID periods to understand how e-commerce behavior changed over time. The main steps of the analysis will include:
+
+&nbsp;
+
+  5.1 Hypothesis Testing :
+
+- The project will test several straightforward hypotheses, such as:
+
+**H1: Post-COVID e-commerce volume (2022–2023) is higher than pre-COVID years (2018–2019).**
+
+**H2: The share of e-commerce within total retail trade increased after the pandemic.**
+
+**H3: Online card spending (BKM) moves in the same direction as total e-commerce volume.**
+
+*These will be evaluated using simple techniques such as mean comparison, percentage-change analysis, and basic correlation analysis.*
+
+&nbsp;
+
+  5.2 AI / Forecasting Component :
+
+- To estimate missing values for 2024–2025, I will use a simple Python time-series model called **Facebook Prophet**.
+
+I plan to use it in the following basic form:
+
+     from prophet import Prophet
+   
+     model = Prophet()
+   
+     forecast = model.fit(df).predict(model.make_future_dataframe(periods=2, freq="Y"))
+
+
+*This will allow me to create estimated e-commerce values for 2024 and 2025 and extend the trend analysis beyond the available historical data.*
+
+&nbsp;
+
+  5.3 Visual Analysis :
+
+- The analysis will include time-series plots, bar charts comparing pre- and post-COVID periods, growth rate visuals, and simple correlation scatterplots. These visuals will help demonstrate how COVID-19 affected e-commerce activity in Turkey.
 
 ##  6. Expected Outcomes
 This project is expected to show a significant structural increase in Turkey’s e-commerce market following the COVID-19 pandemic. Anticipated findings include:
@@ -132,4 +170,4 @@ This project is expected to show a significant structural increase in Turkey’s
 - A strong positive correlation between online card payments and total e-commerce activity.
 - Sector-specific differences showing that grocery and daily-consumption categories experienced the most rapid and lasting growth.
 
-The results will offer quantitative evidence that COVID-19 accelerated Turkey’s transition toward a digitally driven retail economy and permanently transformed consumer shopping behavior.
+These results will offer quantitative evidence that COVID-19 accelerated Turkey’s transition toward a digitally driven retail economy and permanently transformed consumer shopping behavior. Additionally, the forecasted values for 2024–2025 (generated using Facebook Prophet) are expected to support the continuation of these long-term trends.
